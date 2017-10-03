@@ -28,20 +28,19 @@
                 <div class="alert" :class="alertClass" role="alert">
                   {{ alert }}
                 </div>
-                <form class="margin-bottom-0" name="loginForm">
+                <form class="margin-bottom-0" name="loginForm" v-on:submit.prevent="doLogin">
                     <div class="form-group m-b-15">
-                        <input type="text" class="form-control input-lg" name="email" required placeholder="Email" />
+                        <input type="text" class="form-control input-lg" v-bind:class="{ 'is-invalid': email }" v-model="email" required placeholder="Email" />
 
                         <div class="invalid-feedback">
-                              <div>Email is required</div>
-                              <div>Email must be in valid email format</div>
+                            <div v-if="email == ''">Email is required</div>
                         </div>
                     </div>
                     <div class="form-group m-b-15">
-                        <input type="password" class="form-control input-lg" name="password" required placeholder="Password" />
+                        <input type="password" class="form-control input-lg" v-bind:class="{ 'is-invalid': password }" v-model="password" required placeholder="Password" />
 
                         <div class="invalid-feedback">
-                            <div>Password is required</div>
+                            <div v-if="password == ''">Password is required</div>
                         </div>
                     </div>
                     <div class="login-buttons">
@@ -80,6 +79,24 @@ export default {
       },
       alert: '',
       alertClass: '',
+      email: '',
+      password: ''
+    }
+  },
+  methods: {
+    doLogin() {
+      var data = {
+        email: this.email,
+        password: this.password
+      };
+
+      this.$http.post('auth/login', data).then(response => {
+        console.log('response');
+        console.log(response);
+      }, error => {
+        console.log('error');
+        console.log(error);
+      });
     }
   }
 }
