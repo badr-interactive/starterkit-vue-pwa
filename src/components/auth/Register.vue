@@ -28,22 +28,22 @@
                 <div class="alert" :class="alertClass" role="alert">
                   {{ alert }}
                 </div>
-                <form class="margin-bottom-0" name="registerForm">
+                <form class="margin-bottom-0" name="registerForm" v-on:submit.prevent="doRegister">
                     <div class="form-group m-b-15">
-                        <input type="text" class="form-control input-lg" name="email" required placeholder="Email" />
+                        <input type="text" class="form-control input-lg" v-model="email" required placeholder="Email" />
                         <div class="invalid-feedback">
                               <div>Email is required</div>
                               <div>Email must be in valid email format</div>
                         </div>
                     </div>
                     <div class="form-group m-b-15">
-                        <input type="password" class="form-control input-lg" name="password" required placeholder="Password" />
+                        <input type="password" class="form-control input-lg" v-model="password" required placeholder="Password" />
                         <div class="invalid-feedback">
                             <div>Password is required</div>
                         </div>
                     </div>
                     <div class="form-group m-b-15">
-                        <input type="password" class="form-control input-lg" name="confirmation_password" required placeholder="Confirmation Password" />
+                        <input type="password" class="form-control input-lg" v-model="confirmation_password" required placeholder="Confirmation Password" />
 
                         <div class="invalid-feedback">
                             <div>Confirmation Password is required</div>
@@ -81,6 +81,28 @@ export default {
       },
       alert: '',
       alertClass: '',
+      email: '',
+      password: '',
+      confirmation_password: '',
+    }
+  },
+  methods: {
+    doRegister() {
+      var data = {
+        email: this.email,
+        password: this.password,
+        confirmation_password: this.confirmation_password
+      };
+
+      this.$http.post('auth/register', data)
+      .then(response => {
+        console.log('response');
+        console.log(response.data);
+      })
+      .catch(error => {
+        console.log('error');
+        console.log(error.response.data);
+      });
     }
   }
 }

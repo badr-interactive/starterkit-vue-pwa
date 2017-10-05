@@ -6,17 +6,9 @@ import App from './App'
 import router from './router'
 import axios from 'axios'
 
-axios.create({
-  baseURL: 'https://dev.badr.co.id/freedom/'
-})
+axios.defaults.baseURL = 'https://dev.badr.co.id/freedom/';
+// axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
 Vue.prototype.$http = axios;
-// Vue.use(VueResource);
-
-// Vue.http.options.root = 'https://dev.badr.co.id/freedom/';
-// Vue.http.options.emulateJSON = true;
-// Vue.http.options.emulateHTTP = true;
-
-// Vue.http.headers.common['Access-Control-Allow-Origin'] = '*';
 
 Vue.config.productionTip = false
 

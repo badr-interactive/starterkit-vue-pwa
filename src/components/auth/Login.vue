@@ -77,6 +77,7 @@ export default {
         title: 'Quotes',
         content: 'Quote content...',
       },
+      error: 0,
       alert: '',
       alertClass: '',
       email: '',
@@ -87,16 +88,30 @@ export default {
     doLogin() {
       var data = {
         email: this.email,
-        password: this.password
+        password: this.password,
       };
 
-      this.$http.post('auth/login', data).then(response => {
-        console.log('response');
-        console.log(response);
-      }, error => {
-        console.log('error');
-        console.log(error);
+      this.$http.post('auth/login', data)
+      .then(response => {
+
+        this.reset();
+        this.alertClass = 'alert-success';
+        this.alert = response.data.message;
+
+        localStorage.setItem('token', response.data.data.access_token);
+        localStorage.setItem('email', response.data.data.email);
+        localStorage.setItem('name', response.data.data.name);
+        localStorage.setItem('photo', response.data.data.photo);
+      })
+      .catch(error => {
+        this.alert = error.data.message;
+        this.alertClass = 'alert-danger';
+        this.password = '';
       });
+    },
+    reset() {
+      this.email = '';
+      this.password = '';
     }
   }
 }
