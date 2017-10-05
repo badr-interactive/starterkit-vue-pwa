@@ -96,13 +96,21 @@ export default {
 
       this.$http.post('auth/register', data)
       .then(response => {
-        console.log('response');
-        console.log(response.data);
+        this.reset();
+        this.alertClass = 'alert-success';
+        this.alert = response.data.message;
       })
       .catch(error => {
-        console.log('error');
-        console.log(error.response.data);
+        this.alert = error.data.message;
+        this.alertClass = 'alert-danger';
+        this.password = '';
+        this.confirmation_password = '';
       });
+    },
+    reset() {
+      this.email = '';
+      this.password = '';
+      this.confirmation_password = '';
     }
   }
 }
