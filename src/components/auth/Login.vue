@@ -69,6 +69,8 @@
 </template>
 
 <script>
+import auth from '@/services/auth.js';
+
 export default {
   name: 'login',
   data () {
@@ -98,14 +100,7 @@ export default {
         this.alertClass = 'alert-success';
         this.alert = response.data.message;
 
-        localStorage.setItem('user', JSON.stringify({
-          token: response.data.data.access_token,
-          email: response.data.data.email,
-          name: response.data.data.name,
-          photo: response.data.data.photo,
-        }));
-
-        window.location.href = '/';
+        auth.login(response.data.data);
       })
       .catch(error => {
         this.alert = error.data.message;

@@ -5,28 +5,28 @@
       <!-- begin sidebar nav -->
       <ul class="nav">
         <li class="nav-header">Navigation</li>
-        <li routerLinkActive="active"><a [routerLink]="['/']"><i class="fa fa-tachometer"></i>Dashboard</a></li>
-        <li routerLinkActive="active" class="has-sub">
+        <li><router-link to="/"><i class="fa fa-tachometer"></i>Dashboard</router-link></li>
+        <li class="has-sub">
           <a href="javascript:;">
             <b class="caret pull-right"></b>
             <i class="fa fa-users"></i>
             <span>User Management</span>
           </a>
           <ul class="sub-menu">
-              <li routerLinkActive="active"><a href="index.html">User Settings</a></li>
-              <li routerLinkActive="active"><a href="index.html">User Role Settings</a></li>
-              <li routerLinkActive="active"><a href="index.html">User Permission Settings</a></li>
+              <li><router-link to="/">User Settings</router-link></li>
+              <li><router-link to="/">User Role Settings</router-link></li>
+              <li><router-link to="/">User Permission Settings</router-link></li>
           </ul>
         </li>
-        <li routerLinkActive="active" class="has-sub">
+        <li class="has-sub">
           <a href="javascript:;">
               <b class="caret pull-right"></b>
               <i class="fa fa-cog"></i>
               <span>Settings</span>
             </a>
             <ul class="sub-menu">
-                <li routerLinkActive="active"><a href="index.html">Application Settings</a></li>
-                <li routerLinkActive="active"><a href="index_v2.html">System Settings</a></li>
+                <li><router-link to="/">Application Settings</router-link></li>
+                <li><router-link to="/">System Settings</router-link></li>
             </ul>
         </li>
         <!-- begin sidebar minify button -->
@@ -36,7 +36,6 @@
       <!-- end sidebar nav -->
     </div>
     <!-- end sidebar scrollbar -->
-    <div class="sidebar-bg"></div>
   </div>
 </template>
 

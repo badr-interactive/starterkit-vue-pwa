@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import Home from '@/components/home/Home'
 import Hello from '@/components/Hello'
 import Login from '@/components/auth/Login'
 import Register from '@/components/auth/Register'
@@ -10,18 +11,18 @@ const router = new Router({
   routes: [
     {
       path: '/',
-      name: 'Hello',
-      component: Hello,
+      name: 'Home',
+      component: Home,
       meta: { auth: true }
     },
     {
       path: '/login',
-      name: 'login',
+      name: 'Login',
       component: Login
     },
     {
       path: '/register',
-      name: 'register',
+      name: 'Register',
       component: Register
     }
   ],
@@ -33,7 +34,7 @@ router.beforeEach((to, from, next) => {
   if(to.meta.auth == true) {
     console.log(auth);
     if(!auth || !auth.token) {
-      next({name: 'login'})
+      next({name: 'Login'})
     }
   }
   next()

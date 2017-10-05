@@ -85,14 +85,14 @@
         </li>
         <li class="dropdown navbar-user">
           <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
-            <img src="~@/assets/images/avatar-default.svg" alt="avatar" onerror="this.src='~@/assets/images/avatar-default.svg'" />
+            <img src="~@/assets/img/avatar-default.svg" alt="avatar" onerror="this.src='~@/assets/img/avatar-default.svg'" />
             <span class="hidden-xs"></span> <b class="caret"></b>
           </a>
           <ul class="dropdown-menu animated fadeInLeft">
             <li class="arrow"></li>
             <li><a href="javascript:;">Edit Profile</a></li>
             <li class="divider"></li>
-            <li><a href="javascript:;">Log Out</a></li>
+            <li><a href="javascript:;" v-on:click="doLogout">Log Out</a></li>
           </ul>
         </li>
       </ul>
@@ -104,11 +104,24 @@
 </template>
 
 <script>
+import auth from '@/services/auth.js';
+
 export default {
   name: 'header',
   data () {
     return {
       title: 'Web Admin'
+    }
+  },
+  methods: {
+    doLogout() {
+      this.$http.post('auth/logout')
+      .then(response => {
+        auth.logout();
+      })
+      .catch(error => {
+        console.error(error);
+      });
     }
   }
 }

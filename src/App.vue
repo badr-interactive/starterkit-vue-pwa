@@ -1,52 +1,47 @@
 <template>
   <div id="app">
-    <main>
-      <router-view></router-view>
-    </main>
+    <div id="page-container" class="page-sidebar-fixed page-header-fixed">
+      <app-header v-if="auth.user.authenticated"></app-header>
+      <app-sidebar v-if="auth.user.authenticated"></app-sidebar>
+      <div class="sidebar-bg" v-if="auth.user.authenticated"></div>
+        <main>
+          <div id="content" class="content">
+            <router-view></router-view>
+          </div>
+        </main>
+      <app-footer v-if="auth.user.authenticated"></app-footer>
+    </div>
   </div>
 </template>
 
 <script>
+import Header from '@/components/layout/Header'
+import Sidebar from '@/components/layout/Sidebar'
+import Footer from '@/components/layout/Footer'
+import auth from '@/services/auth.js'
+
 export default {
-  name: 'app'
+  name: 'app',
+  components: {
+    'app-header': Header,
+    'app-sidebar': Sidebar,
+    'app-footer': Footer
+  },
+  data() {
+    return {
+      auth: auth
+    }
+  },
+  mounted: function() {
+    this.$nextTick(function() {
+      auth.check();
+    });
+  }
 }
 </script>
 
 <style>
-body {
-  margin: 0;
-}
 
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
-}
-
-main {
-  text-align: center;
-  margin-top: 40px;
-}
-
-header {
-  margin: 0;
-  height: 56px;
-  padding: 0 16px 0 24px;
-  background-color: #35495E;
-  color: #ffffff;
-}
-
-header span {
-  display: block;
-  position: relative;
-  font-size: 20px;
-  line-height: 1;
-  letter-spacing: .02em;
-  font-weight: 400;
-  box-sizing: border-box;
-  padding-top: 16px;
-}
 </style>
 <style lang="scss">
   @import url('./styles.scss');
