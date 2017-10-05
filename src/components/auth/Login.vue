@@ -30,14 +30,14 @@
                 </div>
                 <form class="margin-bottom-0" name="loginForm" v-on:submit.prevent="doLogin">
                     <div class="form-group m-b-15">
-                        <input type="text" class="form-control input-lg" v-bind:class="{ 'is-invalid': email }" v-model="email" required placeholder="Email" />
+                        <input type="text" class="form-control input-lg" v-model="email" required placeholder="Email" />
 
                         <div class="invalid-feedback">
                             <div v-if="email == ''">Email is required</div>
                         </div>
                     </div>
                     <div class="form-group m-b-15">
-                        <input type="password" class="form-control input-lg" v-bind:class="{ 'is-invalid': password }" v-model="password" required placeholder="Password" />
+                        <input type="password" class="form-control input-lg" v-model="password" required placeholder="Password" />
 
                         <div class="invalid-feedback">
                             <div v-if="password == ''">Password is required</div>
@@ -98,10 +98,14 @@ export default {
         this.alertClass = 'alert-success';
         this.alert = response.data.message;
 
-        localStorage.setItem('token', response.data.data.access_token);
-        localStorage.setItem('email', response.data.data.email);
-        localStorage.setItem('name', response.data.data.name);
-        localStorage.setItem('photo', response.data.data.photo);
+        localStorage.setItem('user', JSON.stringify({
+          token: response.data.data.access_token,
+          email: response.data.data.email,
+          name: response.data.data.name,
+          photo: response.data.data.photo,
+        }));
+
+        window.location.href = '/';
       })
       .catch(error => {
         this.alert = error.data.message;
