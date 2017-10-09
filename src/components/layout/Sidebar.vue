@@ -5,7 +5,7 @@
       <!-- begin sidebar nav -->
       <ul class="nav">
         <li class="nav-header">Navigation</li>
-        <li><router-link to="/"><i class="fa fa-tachometer"></i>Dashboard</router-link></li>
+        <router-link to="/" tag="li" active-class="active"><a><i class="fa fa-tachometer"></i><span>Dashboard</span></a></router-link>
         <li class="has-sub">
           <a href="javascript:;">
             <b class="caret pull-right"></b>

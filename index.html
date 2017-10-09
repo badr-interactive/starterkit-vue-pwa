@@ -1,9 +1,16 @@
 <!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if !IE]><!-->
 <html lang="en">
+<!--<![endif]-->
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+    <meta content="" name="description" />
+    <meta content="" name="author" />
+
     <title>starterkit-web-pwa</title>
     <link rel="icon" type="image/png" sizes="32x32" href="<%= htmlWebpackPlugin.files.publicPath %>static/img/icons/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="<%= htmlWebpackPlugin.files.publicPath %>static/img/icons/favicon-16x16.png">
@@ -25,13 +32,14 @@
           if (file.match(/\.(js|css)$/)) { %>
     <link rel="<%= chunk.initial?'preload':'prefetch' %>" href="<%= htmlWebpackPlugin.files.publicPath + file %>" as="<%= file.match(/\.css$/)?'style':'script' %>"><% }}} %>
 
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
     <link rel="stylesheet" href="static/assets/plugins/jquery-ui/jquery-ui.min.css">
     <link rel="stylesheet" href="static/assets/plugins/tether/css/tether.min.css">
-    <link rel="stylesheet" href="static/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="static/assets/css/bootstrap-alpha6.min.css">
     <link rel="stylesheet" href="static/assets/css/font-awesome.min.css">
     <link rel="stylesheet" href="static/assets/css/animate.min.css">
-    <link rel="stylesheet" href="static/assets/css/style-bs4.min.css">
     <link rel="stylesheet" href="static/assets/css/style.min.css">
+    <link rel="stylesheet" href="static/assets/css/style-bs4.min.css">
     <link rel="stylesheet" href="static/assets/css/style-responsive.min.css">
     <link rel="stylesheet" href="static/assets/css/default.css">
 
@@ -47,12 +55,17 @@
 
     <script src="static/assets/plugins/pace/pace.min.js"></script>
     <script src="static/assets/js/popper.min.js"></script>
-    <script src="static/assets/plugins/tether/js/tether.min.js"></script>
     <script src="static/assets/js/jquery-3.2.1.min.js"></script>
     <script src="static/assets/js/jquery-migrate-3.0.0.min.js"></script>
     <script src="static/assets/plugins/jquery-ui/jquery-ui.min.js"></script>
+    <script src="static/assets/plugins/tether/js/tether.min.js"></script>
     <script src="static/assets/js/bootstrap.min.js"></script>
     <script src="static/assets/js/jquery.slimscroll.min.js"></script>
     <script src="static/assets/js/apps.min.js"></script>
+    <script>
+      $(document).ready(function() {
+        App.init();
+      });
+    </script>
   </body>
 </html>
