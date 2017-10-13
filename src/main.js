@@ -5,14 +5,15 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import axios from 'axios'
+import auth from '@/services/auth.js'
 
-const auth = JSON.parse(localStorage.getItem('user'));
 axios.defaults.baseURL = 'https://dev.badr.co.id/freedom/';
 // axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
-if (auth.token != null) {
-  axios.defaults.headers.common['Authorization'] = 'Bearer ' + auth.token;
+if (auth.user.profile && auth.user.profile.token) {
+  // axios.defaults.headers.common['Authorization'] = 'Bearer ' + auth.user.profile.token;
+  axios.defaults.headers.common['Authorization'] = auth.user.profile.token;
 }
-axios.defaults.headers.post['Content-Type'] = 'application/json';
+axios.defaults.headers.common['Content-Type'] = 'application/json';
 Vue.prototype.$http = axios;
 
 Vue.config.productionTip = false
